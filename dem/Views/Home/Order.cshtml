@@ -58,7 +58,7 @@
             <label>Resultant Occupancy (kg)</label>
             <input type='text' id="pointsperc" class="form-control" />
             <br />
-            <input id="Button1" type="button" value="button" onclick="showRow()" />
+          
         </div>
 
 
@@ -88,7 +88,7 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>
+                    <tr class="ordertr">
                         <td>
                             @Html.DisplayFor(modelItem => item.OrderDate)
                         </td>
@@ -98,7 +98,7 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.DeliveryAddress)
                         </td>
-                        <td>
+                        <td class="ordertd">
                             @Html.DisplayFor(modelItem => item.OrderWeight)
                         </td>
                         <td>
@@ -171,6 +171,20 @@
                 calculate();
             });
             $('#pointsgiven').on('change', function () {
+                var Occupancy = $('#pointsperc').val;
+                var tempoccupancy = 0;
+                foreach(tr.ordertr)
+               {
+                td.find.OrderWeight;
+                
+                if (tempoccupancy >= Occupancy) {
+                    tempoccupancy +=
+                        td.checkvalue("checked", true);
+                }
+                else {
+                    return;
+                }
+                }
                 calculate();
             });
             function calculate() {
@@ -185,9 +199,7 @@
                 }
 
                 $('#pointsperc').val(perc);
-                if ($("pointsperc").val() <= item.OrderWeight) {
-
-                }
+               
 
             }
 
