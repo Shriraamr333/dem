@@ -293,6 +293,7 @@
     <Content Include="scripts\jquery-3.5.1.slim.min.map" />
     <Content Include="scripts\jquery-3.5.1.min.map" />
     <Content Include="Views\Home\Order.cshtml" />
+    <Content Include="Views\Default\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
