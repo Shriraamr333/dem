@@ -45,6 +45,7 @@
             <label>Occupancy (%)</label>
             @*<input type='text' id="pointsgiven" class="form-control" placeholder="%" />*@
             <select id="pointsgiven" class="form-control">
+                <option value="5">5</option>
                 <option value="12.5">12.5</option>
                 <option value="25">25</option>
                 <option value="50">50</option>
@@ -88,7 +89,7 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr class="ordertr">
+                    <tr class="ordertr" id=item.OrderId>
                         <td>
                             @Html.DisplayFor(modelItem => item.OrderDate)
                         </td>
@@ -101,8 +102,8 @@
                         <td class="ordertd">
                             @Html.DisplayFor(modelItem => item.OrderWeight)
                         </td>
-                        <td>
-                            <input type="checkbox" id="checkvalue" />
+                        <td class="EligibleforTrip">
+                            <input type="checkbox" class="checkvalue" />
                         </td>
                     </tr>
                 }
@@ -171,21 +172,36 @@
                 calculate();
             });
             $('#pointsgiven').on('change', function () {
-                var Occupancy = $('#pointsperc').val;
-                var tempoccupancy = 0;
-                foreach(tr.ordertr)
-               {
-                td.find.OrderWeight;
-                
-                if (tempoccupancy >= Occupancy) {
-                    tempoccupancy +=
-                        td.checkvalue("checked", true);
-                }
-                else {
-                    return;
-                }
-                }
                 calculate();
+                $('.checkvalue').each(function (index, value) {
+                    $(value).attr('checked', false);
+                });
+                var Occupancy = $('#pointsperc').val();
+                var tempoccupancy = 0.0;
+                //element.find('tbody').children("tr").each(function () {
+                tr = $('#example').children('tbody');
+                $("#example tbody tr").each(function (index, value) {
+                    tempoccupancy += parseFloat($(value).find('td.ordertd').html());
+                    if (tempoccupancy <= Occupancy) {
+                        $(value).find('td.EligibleforTrip').find('.checkvalue').attr('checked', true);
+                    }
+                    else {
+                        return;
+                    }                    
+                });
+               // $.each(tr.OrderWeight)
+               //{
+               //  td.find.OrderWeight;
+               //  $(this).children(".ordertd")
+               //  if (tempoccupancy >= Occupancy) {
+               //     tempoccupancy +=
+               //         td.checkvalue("checked", true);
+               // }
+               // else {
+               //     return;
+               // }
+               // }
+                
             });
             function calculate() {
                 var pPos = parseInt($('#pointspossible').val());
