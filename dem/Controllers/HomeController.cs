@@ -92,6 +92,10 @@ namespace dem.Controllers
             }
         }
 
+        public ActionResult Vehicle(string id)
+        {
+            return View();
+        }
     }
 }
     

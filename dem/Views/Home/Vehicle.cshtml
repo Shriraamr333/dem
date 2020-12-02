@@ -2,7 +2,7 @@
 @{
     Layout = null;
 }
-<style>
+@*<style>
     body {
         padding: 50px;
         background-color: lightgreen;
@@ -12,50 +12,42 @@
    .container{
        display:block;
    }
-</style>
+</style>*@
 <!DOCTYPE html>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">*@
     @*<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>*@
     <title>Vehicle</title>
 </head>
 <body>
-    <div id="container">
-       
-        <div class="row">
-            <div class="col-sm-4">
-                <label>Vehicle type</label>
-                <select id="myList" class="form-control">
-                    <option value="1">Tata Ace</option>
-                    <option value="2">Mahindra Mini Truck</option>
-                    <option value="3">Tata Mini Truck</option>
+    
+    <table class="table table-striped table-bordered" style="width:100%" id="secondtable">
+        <thead>
+            <tr>
+                <th></th>
+                <th>OrderID</th>
+                <th>StringOrderDate</th>
+                <th>OrderAmount</th>
+                <th>OrderQuantity</th>
+                <th>DeliveryAddress</th>
+                <th>DeliveryStatus</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <script src="~/Scripts/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $(document).on("click", "#transferrows", function () {
+                var getselectedvalues = $("#example input:checked").parents("tr").clone().appendTo($("#secondtable tbody").add(getselectedvalues));
+            })
+        })
 
-                </select>
-            </div>
-            <div class="col-sm-4">
-                <label>Total Capacity</label>
-                <div id="datepicker ">
-                    <input class="form-control" type="text" />
-
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <label>Occupancy</label>
-                <select id="myList" class="form-control">
-                    <option value="1">12.5%</option>
-                    <option value="2">25%</option>
-                    <option value="3">50%</option>
-                    <option value="3">100%</option>
-
-                </select>
-            </div>
-        </div>
-        
-        </div>
-          </body>    
+    </script>
+</body>    
 </html>
