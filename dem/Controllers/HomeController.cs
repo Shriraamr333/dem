@@ -34,6 +34,7 @@ namespace dem.Controllers
                     foreach (DataRow row in dt.Rows)
                     {
                         var ord = new Order();
+                        ord.OrderId = Convert.ToString(row["orderid"]);
                         ord.OrderDate = Convert.ToDateTime(row["orderdate"]).ToString(@"dd MMMM yyyy hh:mm:ss tt");
                         ord.DeliveryAddress = Convert.ToString(row["deliveryaddress"]);
                         ord.OrderQuantity = Convert.ToInt32(row["orderquantity"]);

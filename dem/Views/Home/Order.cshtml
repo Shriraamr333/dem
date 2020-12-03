@@ -18,7 +18,7 @@
     @*<link href="https://getbootstrap.com/docs/4.0/examples/starter-template/starter-template.css" rel="stylesheet">*@
     @*<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">*@
     @*<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">*@
-
+    <script src="~/Scripts/jquery-3.5.1.min.js"></script>
 </head>
 <body>
 
@@ -34,21 +34,22 @@
 
     <div class="row">
         <div class="col-sm-3">
-            <label for="departmentsDropdown"><b>Vehicle type</b></label>
+            <label for="selectvehicle"><b>Vehicle type</b></label>
 
-            <select class="form-control" onchange="getValue()" id="VehicleDropdown" name="VehicleDropdown"></select>
+            <select class="form-control" onchange="getValue()" id="selectvehicle" name="selectvehicle"></select>
         </div>
         <br />
         <div class="col-sm-3">
             <label>Total Capacity (Kg)</label>
-            <input type='text' id="pointspossible" class="form-control" />
+            <input type='text' id="txtcapacity" class="form-control" />
 
         </div>
         <br />
         <div class="col-sm-3">
             <label>Occupancy (%)</label>
             @*<input type='text' id="pointsgiven" class="form-control" placeholder="%" />*@
-            <select id="pointsgiven" class="form-control">
+            <select id="selectOccupancy" class="form-control">
+                <option value="Select Option">Select Option</option>
                 <option value="5">5</option>
                 <option value="12.5">12.5</option>
                 <option value="25">25</option>
@@ -61,7 +62,7 @@
 
         <div class="col-sm-3">
             <label>Resultant Occupancy (kg)</label>
-            <input type='text' id="pointsperc" class="form-control" />
+            <input type='text' id="txtoccupancy" class="form-control" />
 
 
         </div>
@@ -70,13 +71,13 @@
     </div>
     <br />
     <div class="col-sm-3">
-       
-        <input type="button" id="buttonsheet"  title="Delete" value="Prepare sheet" />
+
+        <input type="button" id="buttonsheet" title="Delete" value="Prepare sheet" />
         @*<input type="button" id="buttonsheet" title="Delete" value="Prepare sheet" onclick="location.href='@Url.Action("Vehicle", "Home", new { id = "jnmuinui8" })'" />*@
         @* <input type="button" value="Prepare sheet" id="transferrows" onclick="selected"/>*@
         @*<a target='_blank' href='page2.html'>Click To Navigate</a>*@
         @*<a id="transferrows" href="@Url.Action("Vehicle", "Home")" class="btn btn-info">Prepare sheet</a>
-        <input type="button" value="Prepare sheet" onclick="window.open('@Url.Action("ExportPrintDI", "Home", new { id = item.OrderID })')" class="btn btn-info" />*@
+            <input type="button" value="Prepare sheet" onclick="window.open('@Url.Action("ExportPrintDI", "Home", new { id = item.OrderID })')" class="btn btn-info" />*@
         @*<input type="button" value="Create" onclick="location.href='@Url.Action("Vehicle", "Home")'" id="transferrows"/>*@
         @*<input type="button" value="Forgot Password" onclick="window.location.href('@Url.Action("Vehicle","Home")')" />*@
         @* <input id='btnForgotPassword' type="button" value="Forgot Password" />*@
@@ -84,9 +85,12 @@
     </div>
     <br />
     <div id="container">
-        <table class="table table-striped table-bordered" style="width:100%" id="maintable">
+        <table class="table table-striped table-bordered" style="width:100%" id="ordertable">
             <thead>
                 <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.OrderId)
+                    </th>
                     <th>
                         @Html.DisplayNameFor(model => model.OrderDate)
                     </th>
@@ -107,30 +111,33 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                <tr class="ordertr" id="item.OrderId">
-                    <td>
-                        @Html.DisplayFor(modelItem => item.OrderDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.OrderQuantity)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DeliveryAddress)
-                    </td>
-                    <td class="ordertd">
-                        @Html.DisplayFor(modelItem => item.OrderWeight)
-                    </td>
-                    <td class="EligibleforTrip">
-                        <input type="checkbox" class="checkvalue" />
-                    </td>
-                </tr>
+                    <tr class="ordertr" id=item.OrderId>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OrderId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OrderDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OrderQuantity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DeliveryAddress)
+                        </td>
+                        <td class="ordertd">
+                            @Html.DisplayFor(modelItem => item.OrderWeight)
+                        </td>
+                        <td class="EligibleforTrip">
+                            <input type="checkbox" class="checkvalue" />
+                        </td>
+                    </tr>
                 }
             </tbody>
         </table>
     </div>
 
 
-    <table class="table table-striped table-bordered" style="width:100%" id="secondtable">
+    @*<table class="table table-striped table-bordered" style="width:100%" id="secondtable">
         <thead>
             <tr>
 
@@ -142,149 +149,8 @@
             </tr>
         </thead>
         <tbody></tbody>
-    </table>
-
-
-
-    <script src="~/Scripts/jquery-3.5.1.min.js"></script>
-    @*<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>*@
-    @*<script src="https://getbootstrap.com/dist/js/bootstrap.min.js"></script>*@
-    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>*@
-
-
-    <script>
-        $(document).ready(function () {
-            function searchByColumn(table) {
-                var defaultSearch = 1
-                $(document).on('change', '#select-column', function () {
-                    defaultSearch = this.value;
-                });
-
-            }
-            var table = $('#maintable').DataTable();
-            searchByColumn(table);
-        });
-    </script>
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $.ajax({
-                type: "GET",
-                url: "/Home/GetData",
-                data: "{}",
-                success: function (data) {
-                    var s = '<option value="-1">Please Select a Car</option>';
-                    for (var i = 0; i < data.vehicles.length; i++) {
-                        s += '<option value="' + data.vehicles[i].vechiclecapacity + '">' + data.vehicles[i].vechicletype + '</option>';
-                    }
-                    $("#VehicleDropdown").html(s);
-                }
-            });
-        });
-
-        function getValue() {
-            var myVal = $("#VehicleDropdown").val();
-            $("#pointspossible").val(myVal);
-        }
-
-    </script>
-
-
-    @*<script type="text/javascript">
-        $('tbody').sortable();
-    </script>*@
-
-    <script>
-        $(function () {
-
-            $('#pointspossible').on('input', function () {
-                calculate();
-            });
-            $('#pointsgiven').on('change', function () {
-                calculate();
-                $('.checkvalue').each(function (index, value) {
-                    $(value).attr('checked', false);
-                });
-                var Occupancy = $('#pointsperc').val();
-                var tempoccupancy = 0.0;
-                //element.find('tbody').children("tr").each(function () {
-                tr = $('#maintable').children('tbody');
-                $("#maintable tbody tr").each(function (index, value) {
-                    tempoccupancy += parseFloat($(value).find('td.ordertd').html());
-                    if (tempoccupancy <= Occupancy) {
-                        $(value).find('td.EligibleforTrip').find('.checkvalue').attr('checked', true);
-                    }
-                    else {
-                        return;
-                    }
-                });
-                // $.each(tr.OrderWeight)
-                //{
-                //  td.find.OrderWeight;
-                //  $(this).children(".ordertd")
-                //  if (tempoccupancy >= Occupancy) {
-                //     tempoccupancy +=
-                //         td.checkvalue("checked", true);
-                // }
-                // else {
-                //     return;
-                // }
-                // }
-
-            });
-            function calculate() {
-                var pPos = parseInt($('#pointspossible').val());
-                var pEarned = parseInt($('#pointsgiven').val());
-                var perc = "";
-                if (isNaN(pPos) || isNaN(pEarned)) {
-                    perc = " ";
-                } else {
-
-                    perc = (pEarned / 100) * pPos;
-                }
-
-                $('#pointsperc').val(perc);
-
-
-            }
-
-        });
-
-    </script>
+    </table>*@
+<script src="~/Script/OrderScript.js"></script>
     
-    <script type="text/javascript">
-        $(function () {
-            $(document).on("click", "#buttonsheet", function () {
-                alert("ok");
-            })
-        })
-
-    </script>
-
-    @*<script>
-            function showRow() {
-                var $tbl = $('#maintable'),
-                    checkvalue = $tbl.add(OrderWeight);
-                $('#Button1').on('click', function () {
-                    var num = $('#pointsperc').val();
-                    $tbl.find(item.OrderWeight).add();
-                    for (i = 0; i < item.OrderWeight; {
-                        var newRow = checkvalue.true;
-                        $tbl.append(newRow);
-                    }
-                                                   });
-
-            }
-
-            $(function () {
-                $('#pointsperc').val(perc)
-                {
-                    window.alert("good");
-                }
-            });
-        </script>*@
 </body>
 </html >

@@ -16,7 +16,7 @@ namespace dem.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(AccountViewModel avm)
+        public ActionResult login(AccountViewModel avm)
         {
             if (avm.account.Username.Equals("abc") && avm.account.Password.Equals("123"))
             {

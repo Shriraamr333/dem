@@ -26,7 +26,7 @@
 </head>
 <body>
     
-    <table class="table table-striped table-bordered" style="width:100%" id="secondtable">
+    <table class="table table-striped table-bordered" style="width:100%" id="preparesheettable">
         <thead>
             <tr>
                 <th></th>
@@ -41,13 +41,13 @@
         <tbody></tbody>
     </table>
     <script src="~/Scripts/jquery-3.5.1.min.js"></script>
-    <script type="text/javascript">
+    @*<script type="text/javascript">
         $(function () {
             $(document).on("click", "#transferrows", function () {
                 var getselectedvalues = $("#example input:checked").parents("tr").clone().appendTo($("#secondtable tbody").add(getselectedvalues));
             })
         })
 
-    </script>
+    </script>*@
 </body>    
 </html>

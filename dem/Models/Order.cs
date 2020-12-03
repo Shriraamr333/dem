@@ -7,8 +7,8 @@ namespace dem.Models
 {
     public class Order
     {
-       
-       public String OrderDate { get; set; }
+       public string OrderId { get; set; }
+        public String OrderDate { get; set; }
         //public Decimal OrderAmount { get; set; } = 0.00M;
        public int OrderQuantity { get; set; } = 0;
        public String DeliveryAddress { get; set; }
