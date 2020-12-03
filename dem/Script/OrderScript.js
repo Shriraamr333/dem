@@ -54,6 +54,17 @@ function calculate() {
     }
 
 
+ $(document).on("click", "#buttonsheet", function () {
+            //var orderid = "";
+            $('#ordertable tr').each(function () {
+                console.log(this.id)
+            })
+            //    tr = $('#maintable').children('tbody');
+            //    $("#maintable tbody tr").each(function (index, value) {
+            //        $(value).find('.checkvalue').attr('checked', true);
+            //        orderid + = tr.item.OrderId + ",";
+            //})
+        })
 
 
 
